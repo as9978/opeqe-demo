@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Trebuchet",
     fontSize: 18,
     color: "#a5a5a5",
+    maxWidth: 300,
+    textAlign:'center',
+    marginBottom:10
   },
   bottomBtnsContainer: {
     display: "flex",
@@ -110,8 +113,25 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 25,
-    textTransform: 'none',
-    lineHeight: 1.2
+    textTransform: "none",
+    lineHeight: 1.2,
+    "&:hover": {
+      backgroundColor: "#996515",
+    },
+  },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      alignItems: "center",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
 }));
 
@@ -138,50 +158,89 @@ export default () => {
         Browse our menu for dine-in, delivery or pickup and catering
       </Typography>
       <div className={classes.bottomBtnsContainer}>
-        <div className={classes.bottomLeftBtnsContainer}>
-          <Button
-            variant="text"
-            className={classes.bottomAsapBtn}
-            disableRipple
-            size={"small"}
-          >
-            ASAP {isDeliveryActive ? "Delivery" : "Pickup"}
-          </Button>
-          {!isDeliveryActive ? (
+        <div className={classes.sectionDesktop}>
+          <div className={classes.bottomLeftBtnsContainer}>
             <Button
               variant="text"
-              className={classes.bottomeAddressBtn}
+              className={classes.bottomAsapBtn}
               disableRipple
               size={"small"}
             >
-              Beverly Hills - 1008 Elden Way
+              ASAP {isDeliveryActive ? "Delivery" : "Pickup"}
             </Button>
-          ) : (
-            <Button variant="contained" className={classes.bottomPickAddress} size={'small'}>
-              What's Your Address ? 
+            {!isDeliveryActive ? (
+              <Button
+                variant="text"
+                className={classes.bottomeAddressBtn}
+                disableRipple
+                size={"small"}
+              >
+                Beverly Hills - 1008 Elden Way
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                className={classes.bottomPickAddress}
+                size={"small"}
+              >
+                What's Your Address ?
+              </Button>
+            )}
+          </div>
+          <Button variant="contained" className={classes.loginBtn} size="small">
+            Change
+          </Button>
+          <div className={classes.DeliveryOrPickUpContainer}>
+            <span
+              className={classes.DeliveryButton}
+              onClick={(e) => HandleDeliveryPickUpClick(e)}
+            >
+              Delivery
+            </span>
+            <span className={classes.orText}> or </span>
+            <span
+              className={classes.PickUpButton}
+              onClick={(e) => HandleDeliveryPickUpClick(e)}
+            >
+              Pickup
+            </span>
+            <div className={classes.HighlightBar} ref={HighLightBarRef} />
+          </div>
+        </div>
+        <div className={classes.sectionMobile}>
+          <div className={classes.bottomLeftBtnsContainer}>
+            <Button
+              variant="text"
+              className={classes.bottomAsapBtn}
+              disableRipple
+              size={"small"}
+            >
+              ASAP {isDeliveryActive ? "Delivery" : "Pickup"}
             </Button>
-          )}
+            {!isDeliveryActive ? (
+              <Button
+                variant="text"
+                className={classes.bottomeAddressBtn}
+                disableRipple
+                size={"small"}
+              >
+                Beverly Hills - 1008 Elden Way
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                className={classes.bottomPickAddress}
+                size={"small"}
+                disableRipple
+              >
+                What's Your Address ?
+              </Button>
+            )}
+          </div>
+          <Button variant="contained" className={classes.loginBtn} size="small">
+            Change
+          </Button>
         </div>
-        <Button variant="contained" className={classes.loginBtn} size="small">
-          Change
-        </Button>
-        <div className={classes.DeliveryOrPickUpContainer}>
-          <span
-            className={classes.DeliveryButton}
-            onClick={(e) => HandleDeliveryPickUpClick(e)}
-          >
-            Delivery
-          </span>
-          <span className={classes.orText}> or </span>
-          <span
-            className={classes.PickUpButton}
-            onClick={(e) => HandleDeliveryPickUpClick(e)}
-          >
-            Pickup
-          </span>
-          <div className={classes.HighlightBar} ref={HighLightBarRef}></div>
-        </div>
-        <div></div>
       </div>
     </div>
   );
