@@ -1,28 +1,6 @@
 import React, { useState, useRef } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Typography, Button, Tabs, Tab, Grid } from "@material-ui/core";
-
-const StyledTabs = withStyles({
-  indicator: {
-    display: "flex",
-    justifyContent: "center",
-    backgroundColor: "transparent",
-    width: 100,
-    "& > span": {
-      maxWidth: 40,
-      width: "100%",
-      backgroundColor: "#635ee7",
-    },
-  },
-})((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
-
-const StyledTab = withStyles((theme) => ({
-  root: {
-    textTransform: "none",
-    color: "black",
-    padding: 0,
-  },
-}))((props) => <Tab disableRipple {...props} />);
+import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   bottomTextContainer: {
@@ -31,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+    marginBottom: 20,
   },
   bottomMainText: {
     fontFamily: "Trebuchet",
@@ -64,9 +43,8 @@ const useStyles = makeStyles((theme) => ({
   },
   bottomeAddressBtn: {
     color: "#a5a5a5",
-    fontSize: 15,
-    fontFamily: "Trebuchet",
     fontSize: 16,
+    fontFamily: "Trebuchet",
     padding: 0,
     marginTop: -7,
     "&:hover": {
@@ -93,64 +71,83 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bottomeTextMainContainer: {},
-  DeliveryOrPickUpContainer:{
-    position:"relative"
+  DeliveryOrPickUpContainer: {
+    position: "relative",
   },
-  HighlightBar:{
-    height:3,
-    background:"#026764",
-    position:"absolute",
-    width:62,
-    left:0,
-    transform:"translateX(0px)",
-    transition:"all 0.3s ease"
+  HighlightBar: {
+    height: 2,
+    background: "#026764",
+    position: "absolute",
+    width: 62,
+    left: 0,
+    transform: "translateX(0px)",
+    transition: "all 0.3s ease",
   },
-  DeliveryButton:{
-    fontWeight:700,
-    cursor:"pointer",
-    display:"inline-block",
-    marginBottom:2
+  DeliveryButton: {
+    fontFamily: "Trebuchet",
+    cursor: "pointer",
+    display: "inline-block",
+    marginBottom: 2,
   },
-  PickUpButton:{
-    fontWeight:700,
-    cursor:"pointer",
-    display:"inline-block",
-    marginBottom:2
+  PickUpButton: {
+    fontFamily: "Trebuchet",
+    cursor: "pointer",
+    display: "inline-block",
+    marginBottom: 2,
+  },
+  orText: {
+    fontFamily: "Trebuchet",
+    color: "#a5a5a5",
+    fontSize: 16,
+  },
+  bottomPickAddress: {
+    backgroundColor: "#996515",
+    color: "white",
+    fontFamily: "Trebuchet",
+    fontSize: 16,
+    paddingBottom: 2,
+    paddingTop: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 25,
+    textTransform: 'none',
+    lineHeight: 1.2
   },
 }));
 
 export default () => {
   const classes = useStyles();
-  const HighLightBarRef = useRef(null)
-  const [value, setValue] = useState(2);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const [isDeliveryActive, setIsDeliveryActive] = useState(true);
+
+  const HighLightBarRef = useRef(null);
+
+  const HandleDeliveryPickUpClick = (e) => {
+    HighLightBarRef.current.style.width = `${e.target.clientWidth}px`;
+    HighLightBarRef.current.style.left = `${e.target.offsetLeft}px`;
+
+    setIsDeliveryActive(!isDeliveryActive);
   };
-
-  const HandleDeliveryPickUpClick = (e)=>{
-    HighLightBarRef.current.style.width = `${e.target.clientWidth}px`
-    HighLightBarRef.current.style.left = `${e.target.offsetLeft}px`
-  }
 
   return (
     <div className={classes.bottomTextContainer}>
-        <Typography className={classes.bottomMainText}>
-          Ready to order ?
-        </Typography>
-        <Typography className={classes.bottomSecondaryText}>
-          Browse our menu for dine-in, delivery or pickup and catering
-        </Typography>
-        <div className={classes.bottomBtnsContainer}>
-          <div className={classes.bottomLeftBtnsContainer}>
-            <Button
-              variant="text"
-              className={classes.bottomAsapBtn}
-              disableRipple
-              size={"small"}
-            >
-              ASAP Pickup
-            </Button>
+      <Typography className={classes.bottomMainText}>
+        Ready to order ?
+      </Typography>
+      <Typography className={classes.bottomSecondaryText}>
+        Browse our menu for dine-in, delivery or pickup and catering
+      </Typography>
+      <div className={classes.bottomBtnsContainer}>
+        <div className={classes.bottomLeftBtnsContainer}>
+          <Button
+            variant="text"
+            className={classes.bottomAsapBtn}
+            disableRipple
+            size={"small"}
+          >
+            ASAP {isDeliveryActive ? "Delivery" : "Pickup"}
+          </Button>
+          {!isDeliveryActive ? (
             <Button
               variant="text"
               className={classes.bottomeAddressBtn}
@@ -159,20 +156,33 @@ export default () => {
             >
               Beverly Hills - 1008 Elden Way
             </Button>
-          </div>
-          <Button variant="contained" className={classes.loginBtn} size="small">
-            Change
-          </Button>
-          <div className={classes.DeliveryOrPickUpContainer}>
-            
-            <span className={classes.DeliveryButton} onClick={(e)=>HandleDeliveryPickUpClick(e)}>Delivery</span>
-            <span> or </span>
-            <span className={classes.PickUpButton} onClick={(e)=>HandleDeliveryPickUpClick(e)}>Pickup</span>
-            <div className={classes.HighlightBar} ref={HighLightBarRef}></div>
-          </div>
-          <div>
-          </div>
+          ) : (
+            <Button variant="contained" className={classes.bottomPickAddress} size={'small'}>
+              What's Your Address ? 
+            </Button>
+          )}
         </div>
+        <Button variant="contained" className={classes.loginBtn} size="small">
+          Change
+        </Button>
+        <div className={classes.DeliveryOrPickUpContainer}>
+          <span
+            className={classes.DeliveryButton}
+            onClick={(e) => HandleDeliveryPickUpClick(e)}
+          >
+            Delivery
+          </span>
+          <span className={classes.orText}> or </span>
+          <span
+            className={classes.PickUpButton}
+            onClick={(e) => HandleDeliveryPickUpClick(e)}
+          >
+            Pickup
+          </span>
+          <div className={classes.HighlightBar} ref={HighLightBarRef}></div>
+        </div>
+        <div></div>
+      </div>
     </div>
   );
 };

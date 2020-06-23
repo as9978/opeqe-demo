@@ -139,7 +139,7 @@ export default ({
     <div style={{scrollSnapAlign:"start"}}>
       <div className={classes.container}>
         <div className={classes.imageContainer}>
-          <img src={image} className={classes.image} />
+          <img src={image} className={classes.image} alt={name}/>
           {special ? (
             <div className={classes.badge}>
               <Typography className={classes.badgeText}>{special}</Typography>

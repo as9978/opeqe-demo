@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,20 +9,16 @@ body {
 
 @font-face {
   font-family: "trebuc";
-  src: local("trebuc"), url(./trebuc.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Trebuchet-MS-Italic";
-  src: local("Trebuchet-MS-Italic"), url(./Trebuchet-MS-Italic.ttf) format("truetype");
+  src: local("trebuc"), url(./assets/fonts/trebuc.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Trebuchet";
-  src: local("Trebuchet_MS"), url(./Trebuchet_MS.ttf) format("truetype");
+  src: local("Trebuchet_MS"),
+    url(./assets/fonts/Trebuchet_MS.ttf) format("truetype");
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

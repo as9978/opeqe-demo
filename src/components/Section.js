@@ -48,7 +48,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     scrollBehavior: "smooth",
-
+    msOverflowStyle: 'none',
+    "&::-webkit-scrollbar":{
+      display: 'none'
+    }
   },
   LeftArrow: {
     position: "absolute",

@@ -1,18 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-  Tabs,
-  Tab,
-} from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Button } from "@material-ui/core";
 
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
-import logo from '../assets/svg/logo.svg'
+import logo from "../assets/svg/logo.svg";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -108,7 +100,7 @@ export default () => {
     <AppBar position="sticky" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Button className={classes.imageBtn}>
-          <img src={logo} className={classes.image} />
+          <img src={logo} className={classes.image} alt="logo" />
         </Button>
         <div className={classes.sectionDesktop}>
           <Button disableRipple className={classes.regularBtns}>
