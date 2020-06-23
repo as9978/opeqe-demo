@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+//fonts
+import "./trebuc.ttf";
+import "./Trebuchet-MS-Italic.ttf"
+import "./Trebuchet_MS.ttf"
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
