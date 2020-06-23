@@ -136,7 +136,7 @@ export default ({
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{scrollSnapAlign:"start"}}>
       <div className={classes.container}>
         <div className={classes.imageContainer}>
           <img src={image} className={classes.image} />

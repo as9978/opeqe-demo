@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { Typography, Button, Tabs, Tab, Grid } from "@material-ui/core";
 
@@ -93,16 +93,45 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bottomeTextMainContainer: {},
+  DeliveryOrPickUpContainer:{
+    position:"relative"
+  },
+  HighlightBar:{
+    height:3,
+    background:"#026764",
+    position:"absolute",
+    width:62,
+    left:0,
+    transform:"translateX(0px)",
+    transition:"all 0.3s ease"
+  },
+  DeliveryButton:{
+    fontWeight:700,
+    cursor:"pointer",
+    display:"inline-block",
+    marginBottom:2
+  },
+  PickUpButton:{
+    fontWeight:700,
+    cursor:"pointer",
+    display:"inline-block",
+    marginBottom:2
+  },
 }));
 
 export default () => {
   const classes = useStyles();
-
+  const HighLightBarRef = useRef(null)
   const [value, setValue] = useState(2);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const HandleDeliveryPickUpClick = (e)=>{
+    HighLightBarRef.current.style.width = `${e.target.clientWidth}px`
+    HighLightBarRef.current.style.left = `${e.target.offsetLeft}px`
+  }
 
   return (
     <div className={classes.bottomTextContainer}>
@@ -134,6 +163,13 @@ export default () => {
           <Button variant="contained" className={classes.loginBtn} size="small">
             Change
           </Button>
+          <div className={classes.DeliveryOrPickUpContainer}>
+            
+            <span className={classes.DeliveryButton} onClick={(e)=>HandleDeliveryPickUpClick(e)}>Delivery</span>
+            <span> or </span>
+            <span className={classes.PickUpButton} onClick={(e)=>HandleDeliveryPickUpClick(e)}>Pickup</span>
+            <div className={classes.HighlightBar} ref={HighLightBarRef}></div>
+          </div>
           <div>
           </div>
         </div>
